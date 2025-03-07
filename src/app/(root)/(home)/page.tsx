@@ -1,8 +1,13 @@
 "use client";
+import ActionCard from "@/components/custom/ActionCard";
+import { QUICK_ACTIONS } from "@/constants";
 import { useUserRole } from "@/hooks/use-user-role";
 
 export default function Home() {
   const { isInterviewer } = useUserRole();
+
+  const handleQuickAction = (title: string) => {};
+
   return (
     <div className="container mx-auto max-w-7xl p-6">
       {/* WELCOME SECTION */}
@@ -20,7 +25,13 @@ export default function Home() {
       {isInterviewer ? (
         <>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            Show Something here...
+            {QUICK_ACTIONS.map((action) => (
+              <ActionCard
+                key={action.title}
+                action={action}
+                onClick={() => handleQuickAction(action.title)}
+              />
+            ))}
           </div>
         </>
       ) : (
