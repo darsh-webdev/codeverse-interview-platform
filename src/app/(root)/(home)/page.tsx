@@ -2,11 +2,39 @@
 import ActionCard from "@/components/custom/ActionCard";
 import { QUICK_ACTIONS } from "@/constants";
 import { useUserRole } from "@/hooks/use-user-role";
+import { useQuery } from "convex/react";
+import { useState } from "react";
+import { api } from "../../../../convex/_generated/api";
+import { useRouter } from "next/navigation";
+import MeetingModal from "@/components/custom/MeetingModal";
 
 export default function Home() {
-  const { isInterviewer } = useUserRole();
+  const { isInterviewer, isLoading } = useUserRole();
+  const interviews = useQuery(api.interviews.getMyInterviews);
+  const router = useRouter();
 
-  const handleQuickAction = (title: string) => {};
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState<"start" | "join">();
+
+  const handleQuickAction = (title: string) => {
+    switch (title) {
+      case "New Call":
+        setModalType("start");
+        setShowModal(true);
+        break;
+
+      case "Join Interview":
+        setModalType("join");
+        setShowModal(true);
+        break;
+
+      default:
+        router.push(`${title.toLowerCase()}`);
+        break;
+    }
+  };
+
+  if (isLoading) return <p>Loading.....</p>;
 
   return (
     <div className="container mx-auto max-w-7xl p-6">
@@ -33,6 +61,13 @@ export default function Home() {
               />
             ))}
           </div>
+
+          <MeetingModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            title={modalType === "join" ? "Join Meeting" : "Start Meeting"}
+            isJoinMeeting={modalType === "join"}
+          />
         </>
       ) : (
         <>
