@@ -7,6 +7,7 @@ import { useState } from "react";
 import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import MeetingModal from "@/components/custom/MeetingModal";
+import Loader from "@/components/custom/Loader";
 
 export default function Home() {
   const { isInterviewer, isLoading } = useUserRole();
@@ -34,7 +35,7 @@ export default function Home() {
     }
   };
 
-  if (isLoading) return <p>Loading.....</p>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="container mx-auto max-w-7xl p-6">
