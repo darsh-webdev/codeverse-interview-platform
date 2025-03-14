@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import EndCallButton from "./EndCallButton";
 
 const MeetingRoom = () => {
   const [layout, setLayout] = useState<"grid" | "speaker">("speaker");
@@ -91,9 +92,7 @@ const MeetingRoom = () => {
                   >
                     <UsersIcon className="size-4" />
                   </Button>
-                  {/* TODO: ADD End Call functionality. (Only the owner of the
-                  call can end the call for all participants) */}
-                  <Button>End Call Button</Button>
+                  <EndCallButton />
                 </div>
               </div>
             </div>
