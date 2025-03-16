@@ -22,6 +22,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import EndCallButton from "./EndCallButton";
+import CodeEditor from "./CodeEditor";
 
 const MeetingRoom = () => {
   const [layout, setLayout] = useState<"grid" | "speaker">("speaker");
@@ -50,7 +51,7 @@ const MeetingRoom = () => {
           className="relative"
         >
           {/* VIDEO LAYOUT */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 pr-8">
             {layout === "grid" ? <PaginatedGridLayout /> : <SpeakerLayout />}
 
             {/* PARTICIPANTS LIST OVERLAY */}
@@ -103,7 +104,7 @@ const MeetingRoom = () => {
 
         {/* RIGHT SIDE */}
         <ResizablePanel defaultSize={65} minSize={25}>
-          <h1>Code Editor will go here..</h1>
+          <CodeEditor />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
