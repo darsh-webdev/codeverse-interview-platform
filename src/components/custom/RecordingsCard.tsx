@@ -4,13 +4,7 @@ import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { calculateRecordingDuration } from "@/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import {
-  CalendarIcon,
-  ClockIcon,
-  CopyIcon,
-  Play,
-  PlayIcon,
-} from "lucide-react";
+import { CalendarIcon, ClockIcon, CopyIcon, PlayIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
 const RecordingsCard = ({ recording }: { recording: CallRecording }) => {
