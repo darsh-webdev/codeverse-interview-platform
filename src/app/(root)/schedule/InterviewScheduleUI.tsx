@@ -25,6 +25,7 @@ import UserInfo from "@/components/custom/UserInfo";
 import { Loader2, XIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { TIME_SLOTS } from "@/constants";
+import MeetingCard from "@/components/custom/MeetingCard";
 
 const InterviewScheduleUI = () => {
   const client = useStreamVideoClient();
@@ -318,6 +319,25 @@ const InterviewScheduleUI = () => {
           </DialogContent>
         </Dialog>
       </div>
+
+      {/* LOADING STATE & MEETING CARDS */}
+      {!interviewers ? (
+        <div className="flex justify-center py-12">
+          <Loader2 className="size-8 animate-spin text-muted-foreground" />
+        </div>
+      ) : interviews.length > 0 ? (
+        <div className="space-y-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {interviews.map((interview) => (
+              <MeetingCard key={interview._id} interview={interview} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="text-center py-12 text-muted-foreground">
+          No Interviews Scheduled
+        </div>
+      )}
     </div>
   );
 };
