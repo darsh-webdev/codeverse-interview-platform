@@ -25,6 +25,7 @@ import {
   ClockIcon,
   XCircleIcon,
 } from "lucide-react";
+import CommentDialog from "@/components/custom/CommentDialog";
 
 type Interview = Doc<"interviews">;
 
@@ -145,6 +146,8 @@ const AdminDashboardPage = () => {
                                 </Button>
                               </div>
                             )}
+
+                            <CommentDialog interviewId={interview._id} />
                           </CardFooter>
                         </Card>
                       );
