@@ -8,6 +8,8 @@ import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import MeetingModal from "@/components/custom/MeetingModal";
 import Loader from "@/components/custom/Loader";
+import { Loader2Icon } from "lucide-react";
+import MeetingCard from "@/components/custom/MeetingCard";
 
 export default function Home() {
   const { isInterviewer, isLoading } = useUserRole();
@@ -72,7 +74,30 @@ export default function Home() {
         </>
       ) : (
         <>
-          <div>Candidate view goes here...</div>
+          <div>
+            <h1 className="text-3xl font-bold">Your Interviews</h1>
+            <p className="text-muted-foreground">
+              View and join scheduled interviews
+            </p>
+
+            <div className="mt-8">
+              {interviews === undefined ? (
+                <div className="flex justify-center py-12">
+                  <Loader2Icon className="size-8 animate-spin text-muted-foreground" />
+                </div>
+              ) : interviews.length > 0 ? (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {interviews.map((interview) => (
+                    <MeetingCard key={interview._id} interview={interview} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12 text-muted-foreground">
+                  You have no scheduled interviews
+                </div>
+              )}
+            </div>
+          </div>
         </>
       )}
     </div>
